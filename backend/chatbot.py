@@ -6,8 +6,6 @@ from twilio.rest import Client
 from fastapi import FastAPI, Request
 from twilio.twiml.messaging_response import MessagingResponse
 
-
-
 # Load environment variables
 load_dotenv()
 
@@ -89,11 +87,5 @@ async def receive_sms(request: Request):
     
     # Return the Twilio response
     return str(twilio_response)
-
-
-
-
-
-
 
 send_sms()
