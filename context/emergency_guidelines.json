@@ -1,0 +1,12 @@
+{
+    "nausea": {
+      "description": "Feeling of sickness with urge to vomit",
+      "management": ["Take anti-nausea medications as prescribed", "Eat small, frequent meals"],
+      "whenToContact": "If unable to keep food/water down for >24 hours"
+    },
+    "fatigue": {
+      "description": "Extreme tiredness that doesn't improve with rest",
+      "management": ["Plan activities for high-energy times", "Take short naps"],
+      "whenToContact": "If severely impacts daily life"
+    }
+  }
