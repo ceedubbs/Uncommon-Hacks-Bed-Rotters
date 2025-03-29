@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require("express");
 const cors = require("cors");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
@@ -7,14 +6,6 @@ const bodyParser = require("body-parser");
 const fs = require("fs").promises;
 const path = require("path");
 require("dotenv").config();
-=======
-const express = require('express');
-const cors = require('cors');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-const { MessagingResponse } = require('twilio').twiml;
-const bodyParser = require('body-parser');
-require('dotenv').config();
->>>>>>> 19cde13475c3ca8df968b6350bdee9ad07566e0b
 
 // Initialize Express app
 const app = express();
@@ -25,7 +16,6 @@ app.use(cors());
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-<<<<<<< HEAD
 // Chat history storage - using a simple in-memory store
 const userSessionsMap = new Map();
 
@@ -219,30 +209,6 @@ const modelConfig = {
     {
       category: "HARM_CATEGORY_DANGEROUS_CONTENT",
       threshold: "BLOCK_MEDIUM_AND_ABOVE",
-=======
-// Chat history storage - using a simple in-memory store (consider a database for production)
-const userSessionsMap = new Map();
-
-// Configure the model with safety settings appropriate for healthcare
-const modelConfig = {
-  model: 'gemini-2.0-flash',
-  safetySettings: [
-    {
-      category: 'HARM_CATEGORY_HARASSMENT',
-      threshold: 'BLOCK_MEDIUM_AND_ABOVE',
-    },
-    {
-      category: 'HARM_CATEGORY_HATE_SPEECH',
-      threshold: 'BLOCK_MEDIUM_AND_ABOVE',
-    },
-    {
-      category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
-      threshold: 'BLOCK_MEDIUM_AND_ABOVE',
-    },
-    {
-      category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
-      threshold: 'BLOCK_MEDIUM_AND_ABOVE',
->>>>>>> 19cde13475c3ca8df968b6350bdee9ad07566e0b
     },
   ],
   generationConfig: {
