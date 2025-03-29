@@ -1,12 +1,35 @@
 {
-    "nausea": {
-      "description": "Feeling of sickness with urge to vomit",
-      "management": ["Take anti-nausea medications as prescribed", "Eat small, frequent meals"],
-      "whenToContact": "If unable to keep food/water down for >24 hours"
+    "fever_neutropenia": {
+      "scenario": "Fever (≥100.4°F / 38°C) during chemotherapy, possibly indicating neutropenic fever (infection with low white blood cells)",
+      "response": "This is an emergency in chemo patients: contact your oncology team immediately (day or night). It likely requires prompt evaluation and IV antibiotics. Do not take Tylenol or ibuprofen to reduce the fever without medical advice – fever is a critical warning sign&#8203;:contentReference[oaicite:15]{index=15}."
     },
-    "fatigue": {
-      "description": "Extreme tiredness that doesn't improve with rest",
-      "management": ["Plan activities for high-energy times", "Take short naps"],
-      "whenToContact": "If severely impacts daily life"
+    "severe_vomiting_diarrhea": {
+      "scenario": "Uncontrolled vomiting or diarrhea leading to inability to keep fluids down (possible dehydration)",
+      "response": "If you cannot keep any fluids down for more than 24 hours or have relentless diarrhea, call your doctor. They may direct you to the emergency room for IV fluids and medications&#8203;:contentReference[oaicite:16]{index=16}. Signs of dehydration include dizziness, dry mouth, and reduced urination. Don't wait beyond 24 hours to seek help in these cases."
+    },
+    "bleeding": {
+      "scenario": "Unusual bleeding, such as nosebleeds that won’t stop, bleeding gums, blood in vomit, urine, or stool, or any significant unexplained bruising",
+      "response": "Apply pressure to any external bleeding. For bleeding that doesn’t stop within a few minutes, or any internal bleeding (blood in vomit or stool), contact your doctor immediately&#8203;:contentReference[oaicite:17]{index=17}. If bleeding is heavy or you feel lightheaded, call 911 or go to the emergency room. Avoid taking anything by mouth if vomiting blood, and lie down if feeling faint."
+    },
+    "allergic_reaction": {
+      "scenario": "Signs of a severe allergic reaction (anaphylaxis) – e.g., swelling of face or throat, hives, difficulty breathing, chest tightness – possibly from a chemo drug or supportive medication",
+      "response": "Call 911 immediately – a severe allergic reaction is life-threatening&#8203;:contentReference[oaicite:18]{index=18}. If you have an epinephrine injector (EpiPen) available, use it while waiting for help. Do not attempt to drive yourself; emergency responders can provide oxygen, epinephrine, and other treatments on the way to the hospital."
+    },
+    "difficulty_breathing": {
+      "scenario": "New or sudden shortness of breath, wheezing, or trouble breathing",
+      "response": "Call your doctor or emergency services right away&#8203;:contentReference[oaicite:19]{index=19}. This could indicate an allergic reaction, a blood clot in the lung, drug-induced lung toxicity, or anemia. If breathing is very labored or accompanied by severe chest pain, call 911. While waiting for help, sit upright and focus on slow, deep breaths."
+    },
+    "chest_pain": {
+      "scenario": "Chest pain, tightness, or heart palpitations",
+      "response": "Treat chest pain seriously. If you feel crushing or squeezing chest pressure (especially with sweating or nausea), call 911 immediately – it could be a heart attack or pulmonary embolism. Even milder chest pain should be reported to your oncologist promptly, as some chemo drugs affect the heart. When in doubt, seek emergency evaluation for chest pain."
+    },
+    "confusion": {
+      "scenario": "New severe confusion, extreme weakness or unresponsiveness",
+      "response": "If a chemo patient becomes suddenly confused, disoriented, or very difficult to wake, seek emergency care. This could be due to infection (sepsis), electrolyte imbalance, or other serious condition. Call 911 if they are not responding normally. Keep them safe from falls or injury until help arrives."
+    },
+    "infusion_site_issue": {
+      "scenario": "During or after IV chemo, pain, swelling, or redness at the IV site (possible extravasation of the drug)",
+      "response": "Alert the chemotherapy nurse immediately if this happens during an infusion. If noticed after you get home, contact your oncology clinic ASAP for instructions. Some chemo drugs leaking out of the vein can cause tissue damage. In the meantime, you might be instructed to apply a cold pack or warm pack depending on the drug, but do so only under guidance from the medical team."
     }
   }
+  
