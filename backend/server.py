@@ -1,7 +1,16 @@
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 import os
 
+app = FastAPI()
+
+class CreateUser(BaseModel):
+    name: str
+    email: str
+    phone: str
+    diagnosis: str = ""
 
 def sign_up(name, email, phone):
     try:
@@ -36,5 +45,11 @@ def sign_up(name, email, phone):
             "message": "An error occurred during registration. Please try again later."
         }
 
-sign_up("John Doe", "john.doe@example.com", "1234567890", "Cancer")
 
+@app.post("/sign_up")
+async def sign_up_endpoint(user: CreateUser):
+    result = sign_up(user.name, user.email, user.phone)
+    if result ["success"]:
+        return result
+    else:
+        raise HTTPException(status_code=400, detail=result["message"])
