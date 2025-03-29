@@ -9,7 +9,7 @@ PhoneNumberValidator = Annotated[Union[str, phonenumbers.PhoneNumber],
 
 
 class CreateUser(BaseModel):
-    username: str
+    name: str
     email: EmailStr
     phone: PhoneNumberValidator
 
