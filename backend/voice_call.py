@@ -31,7 +31,7 @@ async def voice(request: Request):
     response = VoiceResponse()
 
     # Create a 'Gather' to wait for speech input and ensure the call doesn't hang up
-    gather = Gather(input='speech', timeout=10, speech_model='numbers_and_commands')
+    gather = Gather(input='speech', timeout=10, speech_model='phone_call', language='en-US')
     gather.say("Hello, you are speaking with the cancer support bot. Please tell me how I can assist you.")
     response.append(gather)
 
@@ -39,7 +39,6 @@ async def voice(request: Request):
     response.say("Sorry, I didn't catch that. Please try again.")
 
     return PlainTextResponse(content=str(response), media_type="application/xml")
-
 
 
 class CallRequest(BaseModel):
