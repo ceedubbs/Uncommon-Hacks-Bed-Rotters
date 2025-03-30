@@ -7,7 +7,7 @@ from twilio.rest import Client
 from fastapi import APIRouter, Request
 from twilio.twiml.voice_response import VoiceResponse
 from fastapi.responses import PlainTextResponse
-
+from pydantic import BaseModel
 load_dotenv()
 
 voice_call_router = APIRouter()
@@ -31,11 +31,15 @@ async def voice(request: Request):
 
     return PlainTextResponse(content=str(response), media_type="application/xml")
 
+class CallRequest(BaseModel):
+    to_phone: str
+    from_phone: str = "whatsapp:+14155238886"
+
 @voice_call_router.post("/make_call/")
-async def make_call(to_phone: str, from_phone: str = "whatsapp:+14155238886"):
+async def make_call(call_data: CallRequest):
     call = client.calls.create(
-        to=to_phone,
-        from_=from_phone,
+        to=call_data.to_phone,
+        from_=call_data.from_phone,
         url="http://your-server.com/voice/"
     )
 
@@ -43,7 +47,7 @@ async def make_call(to_phone: str, from_phone: str = "whatsapp:+14155238886"):
 
 def detect_intent(project_id, session_id, text, language_code):
     credentials = service_account.Credentials.from_service_account_file(
-        'path_to_your_dialogflow_service_account_key.json'
+        os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
     )
 
     session_client = dialogflow.SessionsClient(credentials=credentials)
