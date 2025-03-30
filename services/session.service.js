@@ -7,6 +7,24 @@ const { MongoClient } = require("mongodb");
 // Chat history storage - using a simple in-memory store
 const userSessionsMap = new Map();
 
+
+
+async function analyzeSymptomsWithGemini(message) {
+  const prompt = `You are an AI trained to analyze patient conversations and extract relevant medical symptoms. Please read the following text and identify any symptoms that might be mentioned. If you find any, return them as a list of symptoms.\n\nMessage: "${message}"\n\nPlease return the symptoms as a list of strings.`;
+
+  try {
+      const response = await GeminiAPI.analyzeTextForSymptoms(prompt);
+      
+      if (response && response.symptoms) {
+          return response.symptoms; // return detected symptoms
+      }
+      
+      return []; // return empty array if no symptoms detected
+  } catch (err) {
+      console.error("Error analyzing with Gemini:", err);
+      return [];
+  }
+}
 // Helper function to get or create a chat session
 const getChatSession = (userWhatsAppNumber) => {
   if (!userSessionsMap.has(userWhatsAppNumber)) {
@@ -103,7 +121,9 @@ async function getChatHistory(phone) {
         // Return the user's chat history
         return {
             success: true,
-            chat_history: user.chat_history
+            chat_history: user.chat_history,
+            symptoms: user.symptoms,
+          
         };
     } catch (err) {
         console.error("An error occurred:", err);

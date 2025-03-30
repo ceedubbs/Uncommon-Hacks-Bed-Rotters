@@ -6,25 +6,39 @@ from twilio.rest import Client
 from fastapi import FastAPI, Request
 from twilio.twiml.messaging_response import MessagingResponse
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 19cde13475c3ca8df968b6350bdee9ad07566e0b
-# Load environment variables
 load_dotenv()
 
 app = FastAPI()
 
-def send_sms():
-    client = Client(os.getenv('TWILLIO_ACCOUNT_SID'), os.getenv('TWILLIO_AUTH_TOKEN'))
-    message = client.messages.create(
-    body="Hello there!",
-    from_="whatsapp:+14155238886",
-    to="whatsapp:+16086589635",
-)
+@app.post("/send_message/")
+def send_message(phone, body):
+    try:
+        client = Client(os.getenv('TWILLIO_ACCOUNT_SID'), os.getenv('TWILLIO_AUTH_TOKEN'))
+        message = client.messages.create(
+        body=body,
+        from_="whatsapp:+14155238886",
+        to=phone,
+    )
+        return {"success": True, "message": message.body}
+    except Exception as e:
+        print(f"Error sending message: {e}")
+        return {"success": False, "error": str(e)}
+    
+@app.post("/receive_sms")
+async def receive_sms(request: Request):
+    form_data = await request.form()
+    user_message = form_data.get('Body', '')
+    user_phone = form_data.get('From', '')
+    
+    response = generate_response(user_message)
+    
+    twilio_response = MessagingResponse()
+    twilio_response.message(response['response'])
+    
+    return str(twilio_response)
 
-    print(message.body)
+
+
 
 def generate_response(message: str, user_context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
@@ -56,11 +70,7 @@ def generate_response(message: str, user_context: Optional[Dict[str, Any]] = Non
         response = model.generate_content(
             prompt)
         
-        # Process and format the response
         formatted_response = response.text.strip()
-        
-        # Add metadata
-       
         
         return {
             "success": True,
@@ -76,30 +86,9 @@ def generate_response(message: str, user_context: Optional[Dict[str, Any]] = Non
             "fallback_response": "I apologize, but I'm having trouble processing your message right now. Please try again in a moment, or reach out to your healthcare provider for immediate support."
         }
 
-@app.post("/receive_sms")
-async def receive_sms(request: Request):
-    # Extract the incoming message and sender's phone number from the request
-    form_data = await request.form()
-    user_message = form_data.get('Body', '')
-    user_phone = form_data.get('From', '')
-    
-    # Generate a response based on the received message
-    response = generate_response(user_message)
-    
-    # Create a Twilio response object to reply back to the user
-    twilio_response = MessagingResponse()
-    twilio_response.message(response['response'])
-    
-    # Return the Twilio response
-    return str(twilio_response)
-
-<<<<<<< HEAD
+send_message("whatsapp:+082340967", "Hello")
 
 
 
 
 
-
-=======
->>>>>>> 19cde13475c3ca8df968b6350bdee9ad07566e0b
-send_sms()
