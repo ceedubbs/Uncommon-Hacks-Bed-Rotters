@@ -1,13 +1,14 @@
-# Chemotherapy WhatsApp Chatbot
+# Chemopal: Chemotherapy Support via WhatsApp and Voice Call
 
-A WhatsApp-based healthcare chatbot specifically tailored to chemotherapy support. The chatbot provides information about chemotherapy treatments, side effects, and supportive care, accessible through WhatsApp.
+A healthcare chatbot and voice assistant designed to provide dedicated support to chemotherapy patients. Accessible through WhatsApp and voice calls, Chemopal offers vital information on chemotherapy treatments, side effects, and emotional support, ensuring patients receive the care they need at any time.
 
 ## Features
 
-- **WhatsApp Integration**: Accessible through WhatsApp using Twilio's API
+- **WhatsApp Integration**: Accessible through WhatsApp using Twilio's API and Gemini API
 - **Context-aware Responses**: References specific chemotherapy knowledge from JSON context files
 - **Conversation Memory**: Maintains conversation history for personalized responses
 - **Admin Controls**: Endpoints for monitoring and maintenance
+- **Call Functionality**: Voice interaction via phone number, utilizing Twilio's voice API and Gemini API for real-time communication and personalized support
 
 ## Project Structure
 

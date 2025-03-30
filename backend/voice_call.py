@@ -43,7 +43,7 @@ async def voice(request: Request):
     if not user_input:
         # Initial greeting or re-prompt
         if 'redirect_count' not in request.query_params:
-            response.say("Hello, this is Emma. I'm here to listen and help with your cancer care questions.", voice="woman")
+            response.say("Hello Dear, I am Emma. I'm here to listen and help with your cancer care questions.", voice="woman")
         
         gather = Gather(
             input='speech',
