@@ -5,20 +5,26 @@ from dotenv import load_dotenv
 from twilio.rest import Client
 from fastapi import FastAPI, Request
 from twilio.twiml.messaging_response import MessagingResponse
+from pydantic import BaseModel
 
 load_dotenv()
 
 app = FastAPI()
 
+
+class MessageRequest(BaseModel):
+    phone: str
+    body: str
+
 @app.post("/send_message/")
-def send_message(phone, body):
+def send_message(request: MessageRequest):
     try:
         client = Client(os.getenv('TWILLIO_ACCOUNT_SID'), os.getenv('TWILLIO_AUTH_TOKEN'))
         message = client.messages.create(
-        body=body,
-        from_="whatsapp:+14155238886",
-        to=phone,
-    )
+            body=request.body,
+            from_="whatsapp:+14155238886",
+            to=f"whatsapp:{request.phone}",
+        )
         return {"success": True, "message": message.body}
     except Exception as e:
         print(f"Error sending message: {e}")
