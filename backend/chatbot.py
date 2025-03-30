@@ -16,11 +16,12 @@ chatbot_router = APIRouter()
 class MessageRequest(BaseModel):
     phone: str
     body: str
-
+    
+client = Client(os.getenv('TWILLIO_ACCOUNT_SID'), os.getenv('TWILLIO_AUTH_TOKEN'))
 @chatbot_router.post("/send_message")
 def send_message(request: MessageRequest):
     try:
-        client = Client(os.getenv('TWILLIO_ACCOUNT_SID'), os.getenv('TWILLIO_AUTH_TOKEN'))
+        
         message = client.messages.create(
             body=request.body,
             from_="whatsapp:+14155238886",
