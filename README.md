@@ -1,13 +1,23 @@
-# Chemotherapy WhatsApp Chatbot
 
-A WhatsApp-based healthcare chatbot specifically tailored to chemotherapy support. The chatbot provides information about chemotherapy treatments, side effects, and supportive care, accessible through WhatsApp.
+
+# Chemo-Pal
+
+Chemo-Pal is a WhatsApp-based healthcare pal specifically tailored to chemotherapy support. The chatbot provides information about chemotherapy treatments, side effects, and supportive care, accessible through WhatsApp.
+
+Purpose:
+
+- Chemotherapy is a long and gruling process. In the moments of discomfort, WebMD doesn't bring the certainty and attention that patients.
+- Chemo-Pal provides accuate online-sourced medical remedies and OTC solutions based on a patient's immediate symptoms and needs
+- Chemo-Pal takes note of symptoms and when they happen so that treatment progress can be tracked
+
 
 ## Features
 
-- **WhatsApp Integration**: Accessible through WhatsApp using Twilio's API
-- **Context-aware Responses**: References specific chemotherapy knowledge from JSON context files
-- **Conversation Memory**: Maintains conversation history for personalized responses
-- **Admin Controls**: Endpoints for monitoring and maintenance
+- **WhatsApp Integration**: Accessible through WhatsApp using Twilio's API ✅
+- **Context-aware Responses**: References specific chemotherapy knowledge from JSON context files ✅
+- **Conversation Memory**: Maintains conversation history for personalized responses ✅
+- **Admin Controls**: Endpoints for monitoring and maintenance 🚧
+- **Agentic Reminders**: Scheduled message check-ups for symptoms and progress 🚧
 
 ## Project Structure
 
