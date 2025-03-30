@@ -92,7 +92,6 @@ def generate_response(message: str, user_context: Optional[Dict[str, Any]] = Non
             "fallback_response": "I apologize, but I'm having trouble processing your message right now. Please try again in a moment, or reach out to your healthcare provider for immediate support."
         }
 
-send_message("whatsapp:+082340967", "Hello")
 
 
 
