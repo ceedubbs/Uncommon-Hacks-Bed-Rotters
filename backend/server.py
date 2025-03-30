@@ -3,8 +3,11 @@ from pymongo.errors import PyMongoError
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import os
+from chatbot import chatbot_router  # Import the chatbot routes
+
 
 app = FastAPI()
+app.include_router(chatbot_router)
 
 class CreateUser(BaseModel):
     name: str

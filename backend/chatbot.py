@@ -9,14 +9,14 @@ from pydantic import BaseModel
 
 load_dotenv()
 
-app = FastAPI()
+chatbot_router = FastAPI()
 
 
 class MessageRequest(BaseModel):
     phone: str
     body: str
 
-@app.post("/send_message/")
+@chatbot_router.post("/send_message/")
 def send_message(request: MessageRequest):
     try:
         client = Client(os.getenv('TWILLIO_ACCOUNT_SID'), os.getenv('TWILLIO_AUTH_TOKEN'))
@@ -30,7 +30,7 @@ def send_message(request: MessageRequest):
         print(f"Error sending message: {e}")
         return {"success": False, "error": str(e)}
     
-@app.post("/receive_sms")
+@chatbot_router.post("/receive_sms")
 async def receive_sms(request: Request):
     form_data = await request.form()
     user_message = form_data.get('Body', '')
