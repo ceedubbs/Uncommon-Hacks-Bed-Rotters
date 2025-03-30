@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/backend
+    env_file:
+      - .env  # Ensure .env file is in the root of the project
+    working_dir: /backend
+    command: uvicorn server:app --host 0.0.0.0 --port 8000 --reload
