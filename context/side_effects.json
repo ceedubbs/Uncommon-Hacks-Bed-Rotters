@@ -1,0 +1,143 @@
+{
+    "nausea": {
+      "description": "Feeling of sickness with an urge to vomit, often due to chemotherapy's effect on the stomach and brain centers",
+      "management": [
+        "Take anti-nausea medications (antiemetics) as prescribed before and after chemo",
+        "Eat small, bland meals throughout the day instead of large meals",
+        "Sip ginger ale or ginger tea; sucking on peppermint candy may help",
+        "Avoid strong odors and greasy or spicy foods"
+      ],
+      "whenToContact": "If unable to keep food or water down for more than 24 hours or if vomiting is severe and persistent"
+    },
+    "vomiting": {
+      "description": "Forceful expulsion of stomach contents; can be acute (during/soon after chemo) or delayed",
+      "management": [
+        "Use prescribed antiemetic medications regularly, not just when vomiting starts",
+        "Stay hydrated with small sips of water or electrolyte solutions",
+        "After vomiting, rinse your mouth to protect teeth and soothe throat",
+        "Gradually reintroduce food with bland items like crackers or toast"
+      ],
+      "whenToContact": "If vomiting continues despite medication or you show signs of dehydration (dizziness, infrequent urination)"
+    },
+    "diarrhea": {
+      "description": "Frequent loose or watery bowel movements caused by chemotherapy irritating the digestive tract",
+      "management": [
+        "Take anti-diarrheal medication (e.g., loperamide) as directed by your care team",
+        "Follow a BRAT diet (bananas, rice, applesauce, toast) to firm up stools",
+        "Stay hydrated with water, clear broths or electrolyte drinks to replace fluids",
+        "Avoid dairy, high-fiber, or greasy foods until diarrhea improves"
+      ],
+      "whenToContact": "If you have more than 6 loose stools a day, blood in stool, or signs of dehydration (dizziness, dry mouth)"
+    },
+    "constipation": {
+      "description": "Infrequent or difficult bowel movements; chemo, medications (like anti-nausea drugs), and reduced activity can cause this",
+      "management": [
+        "Increase fiber intake gradually (fruits, vegetables, whole grains) if tolerated",
+        "Drink plenty of fluids (8+ glasses a day) to help soften stools",
+        "Stay active with light exercise or walks to stimulate bowel function",
+        "Use stool softeners or mild laxatives if recommended by your doctor"
+      ],
+      "whenToContact": "If you haven't had a bowel movement in 3+ days accompanied by abdominal pain or vomiting"
+    },
+    "fatigue": {
+      "description": "Persistent feeling of tiredness or exhaustion not relieved by rest, commonly from anemia or the body's repair efforts",
+      "management": [
+        "Prioritize rest and take short naps when needed, but balance with light activity as able",
+        "Delegate tasks and accept help from family/friends to conserve energy",
+        "Engage in gentle exercise (like short walks or yoga) to improve energy levels gradually",
+        "Maintain good nutrition and stay hydrated to support your energy"
+      ],
+      "whenToContact": "If fatigue is worsening or you feel dizzy, extremely weak, or short of breath (could indicate anemia or other issues)"
+    },
+    "hair_loss": {
+      "description": "Partial or complete loss of hair (scalp, body) due to chemo attacking rapidly dividing hair follicle cells",
+      "management": [
+        "Consider scalp cooling caps during chemo infusions (may reduce hair loss for some drugs)",
+        "Use gentle shampoos and soft hair brushes; avoid harsh chemicals or heat styling",
+        "Protect your scalp from sun and cold with hats, scarves, or wigs",
+        "Talk to a counselor or support group about coping with body image changes"
+      ],
+      "whenToContact": "Hair loss itself isn't dangerous, but notify your team if you have scalp irritation or ask about persistent hair loss after treatment"
+    },
+    "loss_of_appetite": {
+      "description": "Reduced desire to eat, which can lead to weight loss and weakness if prolonged",
+      "management": [
+        "Eat small, frequent meals or snacks instead of three large meals",
+        "Focus on high-calorie, high-protein foods (like smoothies, peanut butter, cheese) to get more nutrients in each bite",
+        "Keep easy-to-eat snacks handy (nuts, yogurt, crackers) for when you feel up to eating",
+        "Drink nutritional supplement shakes if you're unable to get enough calories from food"
+      ],
+      "whenToContact": "If you experience significant unintentional weight loss (e.g., >5% of body weight in a month) or signs of malnutrition"
+    },
+    "mouth_sores": {
+      "description": "Soreness or ulcers in the mouth/throat (oral mucositis) caused by chemo affecting the mouth's lining",
+      "management": [
+        "Maintain good oral hygiene: use a soft toothbrush and mild toothpaste",
+        "Rinse mouth several times a day with saltwater or baking soda rinse (avoid alcohol-based mouthwashes)",
+        "Eat soft, bland foods (like mashed potatoes, smoothies, oatmeal) that are easier to swallow",
+        "Use prescribed mouthwashes or topical treatments (\"magic mouthwash\") for pain relief"
+      ],
+      "whenToContact": "If mouth sores prevent you from eating or drinking, or if you develop signs of infection (white patches, bleeding) in your mouth"
+    },
+    "pain": {
+      "description": "General aches or specific pain (e.g., headaches, muscle or joint pain, nerve pain) that can result from chemo or related side effects",
+      "management": [
+        "Take pain-relief medications as directed (e.g., acetaminophen or prescribed analgesics)",
+        "Use relaxation techniques or gentle massage for muscle aches (with doctor approval)",
+        "Apply heat or cold packs to localized pain if appropriate (and if approved by healthcare team)",
+        "Keep a pain diary to track intensity and triggers, and discuss with your oncology team for tailored management"
+      ],
+      "whenToContact": "If pain is severe, new, or uncontrolled by medication, or if you have chest pain or severe headache (seek immediate medical attention for those)"
+    },
+    "fever": {
+      "description": "A rise in body temperature often signaling infection; chemo can cause low white blood cell counts (neutropenia) leading to increased infection risk",
+      "management": [
+        "Check your temperature if you feel warm, chilled, or unwell",
+        "Avoid exposure to infections: wash hands frequently and avoid crowded places when neutropenic",
+        "Stay hydrated and rest if you have mild fever, as advised by your doctor, but do not self-treat fever aggressively without guidance",
+        "Have a plan with your healthcare team for emergency evaluation if fever occurs during chemo (due to neutropenia risk)"
+      ],
+      "whenToContact": "If your temperature is 100.4°F (38°C) or higher, call your doctor immediately – this can be an emergency (possible neutropenic fever)"
+    },
+    "easy_bruising_bleeding": {
+      "description": "Chemotherapy can reduce platelet counts, leading to easy bruising or bleeding (thrombocytopenia). You might bruise from minor bumps or bleed longer from small cuts.",
+      "management": [
+        "Use a soft toothbrush and electric razor to minimize gum bleeding or cuts while shaving",
+        "Avoid activities with high injury risk; protect yourself from bruises (e.g., wear long sleeves, be cautious with sports)",
+        "Avoid medications or supplements that can thin blood (aspirin, ibuprofen, fish oil) unless approved by your doctor",
+        "Keep track of any unusual bruises or bleeding episodes to report to your medical team"
+      ],
+      "whenToContact": "If you have bleeding that won't stop after a few minutes of pressure, very large or unexplained bruises, blood in urine or stool, or severe headaches after minor bumps (could indicate internal bleeding)"
+    },
+    "peripheral_neuropathy": {
+      "description": "Tingling, numbness, or pain in hands and feet caused by nerve damage from certain chemo drugs (like platinum drugs or taxanes)",
+      "management": [
+        "Report symptoms early to your doctor—dose adjustments may prevent worsening neuropathy",
+        "Protect your hands and feet from extreme temperatures (wear gloves in cold, use pot holders for hot items)",
+        "Use assistive devices if needed (hand rails, cane) to prevent falls if balance or sensation is affected",
+        "Consider occupational or physical therapy exercises to help cope with nerve changes"
+      ],
+      "whenToContact": "If neuropathy affects your ability to walk, button clothes, or if you experience severe pain or burning sensations; also report any sudden motor weakness"
+    },
+    "chemo_brain": {
+      "description": "Cognitive changes sometimes called \"chemo brain\" – includes memory lapses, trouble concentrating or multitasking, and feeling mentally slow during/after chemo",
+      "management": [
+        "Use memory aids like planners, phone reminders, or sticky notes to keep track of tasks and appointments",
+        "Do one thing at a time; avoid multitasking which can worsen feeling of mental fog",
+        "Engage in brain exercises (crossword puzzles, reading, memory games) to help sharpen your mind",
+        "Get adequate rest and moderate exercise; fatigue can make cognitive issues worse"
+      ],
+      "whenToContact": "If cognitive issues are significantly affecting your daily functioning or safety (e.g., getting lost, unable to pay bills), inform your doctor for evaluation and support"
+    },
+    "skin_and_nail_changes": {
+      "description": "Chemo can cause dry skin, discoloration, sensitivity, or brittle nails. Skin might peel or become more prone to rash, and nails may crack or develop ridges.",
+      "management": [
+        "Moisturize skin daily with fragrance-free, gentle lotions to help with dryness",
+        "Use sunscreen and cover up to protect skin, as chemo can make skin more sensitive to sun",
+        "Wear gloves when doing chores to protect nails and skin; keep nails trimmed short to prevent breaking",
+        "Avoid hot showers or harsh soaps that can further dry out skin"
+      ],
+      "whenToContact": "If you develop a severe rash, blistering, or signs of infection around nails (redness, pus), or any skin reaction that is painful or spreading"
+    }
+  }
+  

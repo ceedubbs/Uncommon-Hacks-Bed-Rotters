@@ -1,0 +1,46 @@
+{
+    "general": [
+      "Eat several small meals or snacks throughout the day, rather than a few large meals, to help with appetite and nausea&#8203;:contentReference[oaicite:21]{index=21}.",
+      "Stay hydrated by drinking plenty of fluids (about 8–10 cups a day). If plain water isn't appealing, try diluted fruit juices, herbal teas, or water infused with lemon or ginger.",
+      "Include protein with each meal (e.g., eggs, chicken, fish, beans, Greek yogurt) to help repair tissues and maintain muscle&#8203;:contentReference[oaicite:22]{index=22}. High-calorie, high-protein drinks (like smoothies or meal replacement shakes) can be helpful if you're losing weight.",
+      "Aim for a balanced diet with fruits and vegetables of various colors for vitamins and antioxidants, but on days you can't eat much, focus on getting enough calories and protein – you can gradually reintroduce veggies/fruit as you feel better.",
+      "Keep easy-to-eat snacks handy (cheese and crackers, peanut butter, yogurt, nuts or trail mix) so you can eat whenever you feel up to it, even if it's just a few bites at a time."
+    ],
+    "nausea": [
+      "Opt for bland, dry foods especially in the morning – crackers, toast, pretzels – having a little food in your stomach can ease nausea.",
+      "Sip on ginger tea or ginger ale; ginger is known to help settle the stomach&#8203;:contentReference[oaicite:23]{index=23}. Peppermint tea or sucking on peppermint candies can also be soothing.",
+      "Avoid strong food odors by choosing cold or room-temperature foods (sandwiches, salads, yogurt) instead of hot, aromatic dishes if smells trigger nausea.",
+      "Try not to skip meals entirely. Even if you can only eat a few bites, doing so every couple of hours may prevent an empty stomach, which can worsen nausea."
+    ],
+    "mouth_sores": [
+      "Choose soft, soothing foods: oatmeal, smoothies, yogurt, mashed potatoes, scrambled eggs – these are easier to chew and swallow when your mouth is sore.",
+      "Avoid acidic, spicy, or rough-textured foods (citrus fruits, tomato sauce, chili, chips) that can irritate mouth sores.",
+      "Drink liquids through a straw to help bypass sore areas in your mouth, especially when drinking acidic juices or carbonated beverages.",
+      "Keep your mouth moist by sipping water frequently. Sugar-free popsicles or ice chips can also provide relief and hydration for a sore mouth."
+    ],
+    "taste_changes": [
+      "Experiment with seasonings and marinades if foods taste bland. Tart flavors (lemon, vinegar) or herbs and spices can enhance taste, as long as they don't irritate your mouth.",
+      "If you experience a metallic taste, try using plastic utensils and glass cookware instead of metal to reduce that sensation. Adding a bit of sweetener or acidic flavor (like a squeeze of lemon) to foods can help counteract metallic or bitter tastes.",
+      "Cold or frozen foods (popsicles, smoothies, frozen grapes) may be more palatable if hot foods taste off, since cold foods have less aroma and strong taste.",
+      "Rinse your mouth or brush your teeth (with a soft brush) before eating to start with a fresher palate. A mild salt-and-baking-soda rinse before meals can help neutralize tastes."
+    ],
+    "diarrhea": [
+      "Follow the BRAT diet for a day or two: Bananas, Rice, Applesauce, Toast – these low-fiber foods can help firm up stools.",
+      "Avoid caffeine, dairy, and very sweet or greasy foods during active diarrhea, as these can worsen it. Stick to bland foods like boiled potatoes, noodles, crackers, and clear soups until it improves.",
+      "Stay hydrated – take small, frequent sips of water, clear broths, or oral rehydration solutions. Room-temperature fluids may be easier on your stomach than very cold drinks.",
+      "Once diarrhea starts to resolve, reintroduce other foods slowly. Start with lean protein (chicken, fish) and cooked vegetables. Hold off on high-fiber raw fruits/veggies and dairy until you're fully recovered."
+    ],
+    "constipation": [
+      "Increase dietary fiber gradually: prunes or prune juice, pears, bran cereal, flaxseed, and plenty of cooked vegetables can help. Add fiber slowly to avoid gas or bloating.",
+      "Drink warm liquids, especially in the morning – a cup of warm water with lemon, herbal tea, or warm prune juice can stimulate bowel activity.",
+      "Light physical activity such as walking or gentle yoga can encourage bowel movements. Even a short walk around the house can help get your digestive system moving.",
+      "If constipation persists despite diet changes, talk to your healthcare provider. They may recommend a stool softener or laxative. Do not strain excessively during bowel movements; using a footstool to prop your feet can put you in a better position to pass stool."
+    ],
+    "food_safety": [
+      "Wash all fruits and vegetables thoroughly. If your white blood cell count is low, you might prefer cooked fruits and veggies instead of raw to reduce infection risk&#8203;:contentReference[oaicite:24]{index=24}.",
+      "Avoid raw or undercooked meats, seafood, and eggs. Make sure foods like poultry, meat, and fish are fully cooked (use a food thermometer when possible). Skip sushi, runny eggs, or oysters during chemotherapy due to higher bacteria/parasite risk.",
+      "Choose pasteurized dairy products (milk, cheese, juices) to avoid harmful bacteria. Stay away from unpasteurized soft cheeses (feta, brie, blue cheese) and deli meats or smoked fish unless heated until steaming hot.",
+      "Practice safe food handling: keep hot foods hot and cold foods cold. Refrigerate leftovers promptly (within 1–2 hours) and reheat leftovers until steaming. Avoid buffets or salad bars where food may sit out. When in doubt, throw leftovers out after 3–4 days."
+    ]
+  }
+  
