@@ -27,33 +27,35 @@ async def voice(request: Request):
     user_input = form_data.get('SpeechResult', '')  # Capture speech input
     user_phone = form_data.get('From', '')  # Capture phone number
 
-    # Log to check the speech input
     print(f"User input: {user_input}")
+
+    # Create a Twilio response object
+    response = VoiceResponse()
+
+    # If no input is provided, ask the user to speak
+    if not user_input:
+        response.say("Sorry, I didn't hear anything. Please try again.")
+        return PlainTextResponse(content=str(response), media_type="application/xml")
 
     # Process speech input with Gemini AI
     response_text = get_ai_response(user_input)  # Process the input and get a response from Gemini
 
-    response = VoiceResponse()
+    # Respond with the AI response
+    response.say(f"Thank you for sharing. You said: {user_input}. Here is what I can do for you: {response_text}")
 
-    # Initial greeting message
-    response.say("Hello, I am Emma, your personalcancer support bot. How can I assist you today?")
-
-    # Create a 'Gather' to listen for speech input
-    gather = Gather(input='speech', timeout=10, speech_model='phone_call', language='en-US')
-    gather.say("Please tell me how you're feeling today or ask any questions.")
-    response.append(gather)
-
-    # If no speech input is detected, repeat the question
-    response.say("Sorry, I didn't catch that. Please try again.")
-    
-    # Respond with a message from Gemini AI if speech is detected
-    if user_input:  # If there's speech input from the user
-        response.say(f"Thank you for sharing. You said: {user_input}. Here is what I can do for you: {response_text}")
-    
     # Add a final message that keeps the call alive and doesn't end it immediately
     response.say("Thank you for your call.")
 
     return PlainTextResponse(content=str(response), media_type="application/xml")
+
+
+def get_ai_response(prompt):
+    """Get response from Gemini"""
+    if not prompt.strip():  # If the prompt is empty, return a default message
+        return "I'm sorry, I couldn't understand that. Could you please say it again?"
+
+    response = model.generate_content(prompt)
+    return response.text
 
 
 class CallRequest(BaseModel):
