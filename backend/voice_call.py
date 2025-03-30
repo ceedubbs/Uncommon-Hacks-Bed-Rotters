@@ -46,6 +46,8 @@ async def make_call(call_data: CallRequest):
     return {"message": "Call initiated", "call_sid": call.sid}
 
 def detect_intent(project_id, session_id, text, language_code):
+    private_key = os.getenv("DIALOGFLOW_PRIVATE_KEY")
+
     if private_key and "\\n" in private_key:
         private_key = private_key.replace("\\n", "\n")
     
