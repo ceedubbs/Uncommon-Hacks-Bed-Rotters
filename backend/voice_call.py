@@ -46,14 +46,24 @@ async def make_call(call_data: CallRequest):
     return {"message": "Call initiated", "call_sid": call.sid}
 
 def detect_intent(project_id, session_id, text, language_code):
+    if private_key and "\\n" in private_key:
+        private_key = private_key.replace("\\n", "\n")
+    
+    if not private_key:
+        raise ValueError("""
+        Missing Dialogflow private key. Check:
+        1. .env file exists with correct key
+        2. Docker-compose has 'env_file: .env'
+        3. No typos in variable names
+        """)
+    
     credentials = service_account.Credentials.from_service_account_info({
         "type": "service_account",
         "project_id": os.getenv("DIALOGFLOW_PROJECT_ID"),
-        "private_key": os.getenv("DIALOGFLOW_PRIVATE_KEY"),
+        "private_key": private_key,
         "client_email": os.getenv("DIALOGFLOW_CLIENT_EMAIL"),
         "token_uri": "https://oauth2.googleapis.com/token"
     })
-
     session_client = dialogflow.SessionsClient(credentials=credentials)
     session = session_client.session_path(project_id, session_id)
 
@@ -64,3 +74,4 @@ def detect_intent(project_id, session_id, text, language_code):
 
     return response.query_result.fulfillment_text
 
+print(os.getenv("DIALOGFLOW_PRIVATE_KEY"))
