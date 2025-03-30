@@ -46,9 +46,13 @@ async def make_call(call_data: CallRequest):
     return {"message": "Call initiated", "call_sid": call.sid}
 
 def detect_intent(project_id, session_id, text, language_code):
-    credentials = service_account.Credentials.from_service_account_file(
-       'backend\chemopal-chatbot-lwiq-32307fc7aeef.json'
-    )
+    credentials = service_account.Credentials.from_service_account_info({
+        "type": "service_account",
+        "project_id": os.getenv("DIALOGFLOW_PROJECT_ID"),
+        "private_key": os.getenv("DIALOGFLOW_PRIVATE_KEY").replace("\\n", "\n"),
+        "client_email": os.getenv("DIALOGFLOW_CLIENT_EMAIL"),
+        "token_uri": "https://oauth2.googleapis.com/token"
+    })
 
     session_client = dialogflow.SessionsClient(credentials=credentials)
     session = session_client.session_path(project_id, session_id)
