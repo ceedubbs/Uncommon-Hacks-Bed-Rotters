@@ -14,7 +14,8 @@ voice_call_router = APIRouter()
 
 client = Client(os.getenv('TWILLIO_ACCOUNT_SID'), os.getenv('TWILLIO_AUTH_TOKEN'))
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel("gemini-1.5-flash")
+
 
 @voice_call_router.post("/voice")
 async def voice(request: Request):
@@ -24,7 +25,7 @@ async def voice(request: Request):
     
     # Detect intent from Dialogflow
     response_text = get_ai_response(user_input)
-    
+
     response = VoiceResponse()
 
     # If the response from Dialogflow is long, split it
