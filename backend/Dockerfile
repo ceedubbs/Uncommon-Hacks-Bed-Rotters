@@ -11,11 +11,6 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-COPY chemopal-chatbot-lwiq-32307fc7aeef.json /backend/credentials.json
-
-# Set environment variable
-ENV GOOGLE_APPLICATION_CREDENTIALS="/backend/credentials.json"
-
 # Set working directory
 WORKDIR /backend
 

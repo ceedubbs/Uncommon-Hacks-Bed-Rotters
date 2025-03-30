@@ -47,7 +47,7 @@ async def make_call(call_data: CallRequest):
 
 def detect_intent(project_id, session_id, text, language_code):
     credentials = service_account.Credentials.from_service_account_file(
-        os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+       'backend\chemopal-chatbot-lwiq-32307fc7aeef.json'
     )
 
     session_client = dialogflow.SessionsClient(credentials=credentials)
