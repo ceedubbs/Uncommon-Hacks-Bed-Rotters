@@ -6,11 +6,13 @@ from twilio.rest import Client
 from fastapi import FastAPI, Request
 from twilio.twiml.messaging_response import MessagingResponse
 from pydantic import BaseModel
+from fastapi import APIRouter
+
 
 load_dotenv()
 
-chatbot_router = FastAPI()
 
+chatbot_router = APIRouter()
 
 class MessageRequest(BaseModel):
     phone: str
