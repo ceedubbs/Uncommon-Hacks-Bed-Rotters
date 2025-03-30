@@ -49,7 +49,7 @@ def detect_intent(project_id, session_id, text, language_code):
     credentials = service_account.Credentials.from_service_account_info({
         "type": "service_account",
         "project_id": os.getenv("DIALOGFLOW_PROJECT_ID"),
-        "private_key": os.getenv("DIALOGFLOW_PRIVATE_KEY").replace("\\n", "\n"),
+        "private_key": os.getenv("DIALOGFLOW_PRIVATE_KEY"),
         "client_email": os.getenv("DIALOGFLOW_CLIENT_EMAIL"),
         "token_uri": "https://oauth2.googleapis.com/token"
     })
@@ -63,3 +63,4 @@ def detect_intent(project_id, session_id, text, language_code):
     response = session_client.detect_intent(request={"session": session, "query_input": query_input})
 
     return response.query_result.fulfillment_text
+
