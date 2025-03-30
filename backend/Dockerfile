@@ -17,4 +17,4 @@ RUN pip install --no-cache-dir -r /backend/requirements.txt
 EXPOSE 8000
 
 # Run the application using Uvicorn (adjust if needed)
-CMD ["uvicorn", "chatbot:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"]
