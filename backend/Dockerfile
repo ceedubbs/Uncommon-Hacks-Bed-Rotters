@@ -2,7 +2,8 @@
 FROM python:3.11-slim
 
 # Set working directory
-WORKDIR /app
+WORKDIR /backend
+
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -17,8 +18,10 @@ RUN apt-get update && apt-get install -y \
 # Install dependencies for environment variables
 RUN pip install python-dotenv
 
-# Copy and load environment variables
-COPY backend/.env .env
+COPY .env /backend/.env
+
+# Copy the backend directory into the container at /backend
+COPY backend/ /backend/
 
 
 # Copy requirements file
@@ -34,4 +37,4 @@ COPY . .
 EXPOSE 8000
 
 # Command to run the application
-CMD ["uvicorn", "backend.chatbot:app", "--host", "0.0.0.0", "--port", "8000"] 
+CMD ["uvicorn", "chatbot:app", "--host", "0.0.0.0", "--port", "8000"] 
