@@ -10,7 +10,6 @@ class CreateUser(BaseModel):
     name: str
     email: str
     phone: str
-    diagnosis: str = ""
 
 def sign_up(name, email, phone):
     try:
@@ -30,7 +29,9 @@ def sign_up(name, email, phone):
             "name": name,
             "email": email,
             "phone": phone,
-            "diagnosis": ""
+            "diagnosis": "",
+            "chat_history": [],
+            "symptoms": [],
         }
 
         collection.insert_one(post)

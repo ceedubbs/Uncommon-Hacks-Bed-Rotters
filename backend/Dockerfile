@@ -14,6 +14,13 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
+# Install dependencies for environment variables
+RUN pip install python-dotenv
+
+# Copy and load environment variables
+COPY backend/.env .env
+
+
 # Copy requirements file
 COPY requirements.txt .
 
