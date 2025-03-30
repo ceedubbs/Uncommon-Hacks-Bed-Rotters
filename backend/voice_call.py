@@ -24,19 +24,27 @@ from twilio.twiml.voice_response import VoiceResponse, Gather
 @voice_call_router.post("/voice")
 async def voice(request: Request):
     form_data = await request.form()
-    user_input = form_data.get('SpeechResult', '')
+    user_input = form_data.get('SpeechResult', '').strip().lower()
     call_sid = form_data.get('CallSid', '')
     
     response = VoiceResponse()
     
     # Debug logging
-    print(f"New call from {form_data.get('From', '')}")
-    print(f"Call SID: {call_sid}")
+    print(f"Call from {form_data.get('From', '')}")
     print(f"User input: {user_input}")
 
+    # End conversation if user says goodbye
+    end_phrases = ['goodbye', 'bye', "that's all", 'no thanks', "i'm done"]
+    if any(phrase in user_input for phrase in end_phrases):
+        response.say("Thank you for speaking with me today. Remember I'm here whenever you need support.", voice="woman")
+        response.hangup()
+        return PlainTextResponse(content=str(response), media_type="application/xml")
+
     if not user_input:
-        # Initial greeting with gather
-        response.say("Hello, I'm Emma, your personal cancer support assistant.", voice="woman")
+        # Initial greeting or re-prompt
+        if 'redirect_count' not in request.query_params:
+            response.say("Hello, this is Emma. I'm here to listen and help with your cancer care questions.", voice="woman")
+        
         gather = Gather(
             input='speech',
             action=f"/voice?CallSid={call_sid}",
@@ -45,44 +53,41 @@ async def voice(request: Request):
             speechTimeout="auto",
             language="en-US"
         )
-        gather.say("How are you feeling today? Please describe your symptoms or ask any questions.")
+        gather.say("How are you feeling today? Please share what's on your mind.")
         response.append(gather)
-        
-        # If no input after gathering
-        response.say("I didn't hear anything. Please speak clearly after the tone.")
-        response.pause(length=2)
         return PlainTextResponse(content=str(response), media_type="application/xml")
 
     try:
-        # Process user input with Gemini
-        response_text = get_ai_response(
-            f"""You are Emma, a compassionate cancer support assistant. 
-            Respond to this patient in a caring, professional tone in 1-2 short sentences.
-            Patient said: {user_input}"""
-        )
+        # Generate natural, compassionate response
+        prompt = f"""As Emma, a compassionate cancer support nurse, respond naturally to:
+        Patient: {user_input}
+        Respond in 1-2 caring sentences, then ask a relevant follow-up question.
+        Keep your tone warm and professional."""
         
-        # Format the response for phone audio
-        clean_response = response_text.replace('*', '').replace('#', '')
+        ai_response = get_ai_response(prompt)
+        clean_response = ' '.join(ai_response.split())  # Normalize whitespace
         
-        # Continue conversation
-        response.say(f"{clean_response}", voice="woman")
-        
+        # Continue the conversation naturally
         gather = Gather(
             input='speech',
             action=f"/voice?CallSid={call_sid}",
             method="POST",
-            timeout=10,
-            speechTimeout="auto"
+            timeout=15,  # Give users more time to respond
+            speechTimeout="auto",
+            language="en-US"
         )
-
+        gather.say(clean_response, voice="woman")
+        response.append(gather)
+        
+        # Add natural conversational pause
+        response.pause(length=1)
         
     except Exception as e:
-        print(f"Error processing request: {str(e)}")
-        response.say("I'm having trouble understanding. Let's try again.")
-        response.redirect("/voice")
+        print(f"Error: {str(e)}")
+        response.say("I'm having some trouble understanding. Let's try again.")
+        response.redirect(f"/voice?CallSid={call_sid}&redirect_count=1")
 
     return PlainTextResponse(content=str(response), media_type="application/xml")
-
 
 def get_ai_response(prompt):
     """Get response from Gemini"""
