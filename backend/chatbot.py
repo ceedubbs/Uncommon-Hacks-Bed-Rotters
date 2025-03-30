@@ -6,7 +6,7 @@ from twilio.rest import Client
 from fastapi import FastAPI, Request
 from twilio.twiml.messaging_response import MessagingResponse
 from pydantic import BaseModel
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
 
 
 load_dotenv()
@@ -33,18 +33,17 @@ def send_message(request: MessageRequest):
         return {"success": False, "error": str(e)}
     
 @chatbot_router.post("/receive_message")
-async def receive_message(request: Request):
+async def receive_message(request: Request, background_tasks: BackgroundTasks):
     form_data = await request.form()  # Capture the incoming request data
     user_message = form_data.get('Body', '')  # Extract the message from the user
     user_phone = form_data.get('From', '')  # Extract the phone number of the user
 
     response = generate_response(user_message)  # Generate a response based on the user’s message
     
-    twilio_response = MessagingResponse()
+    background_tasks.add_task(send_message, MessageRequest(phone=user_phone, body=response['response']))
 
-    twilio_response.message(response['response'], to=user_phone)
-
-    return str(twilio_response)
+    
+    return "Message sent successfully."
 
 
 
