@@ -1,40 +1,20 @@
-# Use Python 3.11 slim image as base
-FROM python:3.11-slim
+# Use a Python base image
+FROM python:3.9-slim
 
-# Set working directory
+# Set the working directory to /backend
 WORKDIR /backend
-
-
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PORT=8000
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install dependencies for environment variables
-RUN pip install python-dotenv
-
-COPY .env /backend/.env
 
 # Copy the backend directory into the container at /backend
 COPY backend/ /backend/
 
+# Copy the .env file from the root directory to the container
+COPY .env /backend/.env
 
-# Copy requirements file
-COPY requirements.txt .
+# Install any dependencies
+RUN pip install --no-cache-dir -r /backend/requirements.txt
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the application
-COPY . .
-
-# Expose the port the app runs on
+# Expose port
 EXPOSE 8000
 
-# Command to run the application
-CMD ["uvicorn", "chatbot:app", "--host", "0.0.0.0", "--port", "8000"] 
+# Run the application using Uvicorn (adjust if needed)
+CMD ["uvicorn", "chatbot:app", "--host", "0.0.0.0", "--port", "8000"]
