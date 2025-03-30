@@ -18,7 +18,7 @@ class MessageRequest(BaseModel):
     phone: str
     body: str
 
-@chatbot_router.post("/send_message/")
+@chatbot_router.post("/send_message")
 def send_message(request: MessageRequest):
     try:
         client = Client(os.getenv('TWILLIO_ACCOUNT_SID'), os.getenv('TWILLIO_AUTH_TOKEN'))
@@ -32,18 +32,20 @@ def send_message(request: MessageRequest):
         print(f"Error sending message: {e}")
         return {"success": False, "error": str(e)}
     
-@chatbot_router.post("/receive_sms")
-async def receive_sms(request: Request):
-    form_data = await request.form()
-    user_message = form_data.get('Body', '')
-    user_phone = form_data.get('From', '')
-    
-    response = generate_response(user_message)
+@chatbot_router.post("/receive_message")
+async def receive_message(request: Request):
+    form_data = await request.form()  # Capture the incoming request data
+    user_message = form_data.get('Body', '')  # Extract the message from the user
+    user_phone = form_data.get('From', '')  # Extract the phone number of the user
+
+    response = generate_response(user_message)  # Generate a response based on the user’s message
     
     twilio_response = MessagingResponse()
-    twilio_response.message(response['response'])
-    
+
+    twilio_response.message(response['response'], to=user_phone)
+
     return str(twilio_response)
+
 
 
 
