@@ -1,0 +1,14 @@
+{
+  "phoneNumber": "whatsapp:+18584659928",
+  "createdAt": "2025-03-30T00:36:39.781Z",
+  "lastInteraction": "2025-03-30T00:36:39.782Z",
+  "name": "",
+  "diagnosis": "",
+  "symptoms": [
+    {
+      "name": "fever",
+      "severity": "not specified",
+      "reportedAt": "2025-03-30T00:38:44.541Z"
+    }
+  ]
+}

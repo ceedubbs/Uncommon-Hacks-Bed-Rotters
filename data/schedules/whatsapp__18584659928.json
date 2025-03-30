@@ -1,0 +1,10 @@
+{
+  "checkIns": [],
+  "upcomingCheckIns": [],
+  "lastCheckIn": null,
+  "preferences": {
+    "checkInFrequency": "daily",
+    "checkInTime": "09:00",
+    "reminderEnabled": true
+  }
+}

@@ -1,12 +1,16 @@
 // services/session.service.js - User session management
 const { genAI, modelConfig, SYSTEM_PROMPT } = require('../config/ai.config');
 const { logger } = require('../utils/logger');
+<<<<<<< HEAD
 const { MongoClient } = require("mongodb");
 
+=======
+>>>>>>> origin/sara
 
 // Chat history storage - using a simple in-memory store
 const userSessionsMap = new Map();
 
+<<<<<<< HEAD
 
 
 async function analyzeSymptomsWithGemini(message) {
@@ -25,6 +29,8 @@ async function analyzeSymptomsWithGemini(message) {
       return [];
   }
 }
+=======
+>>>>>>> origin/sara
 // Helper function to get or create a chat session
 const getChatSession = (userWhatsAppNumber) => {
   if (!userSessionsMap.has(userWhatsAppNumber)) {
@@ -96,6 +102,7 @@ const setupSessionCleanup = () => {
   }, 60 * 60 * 1000); // Check every hour
 };
 
+<<<<<<< HEAD
 
 
 async function getChatHistory(phone) {
@@ -198,12 +205,19 @@ async function appendChatHistory(phone, message) {
 
 
 
+=======
+>>>>>>> origin/sara
 module.exports = {
   getChatSession,
   resetUserSession,
   getSessionCount,
+<<<<<<< HEAD
   setupSessionCleanup,
   getChatHistory,
   appendChatHistory
 };
 
+=======
+  setupSessionCleanup
+};
+>>>>>>> origin/sara
