@@ -1,5 +1,5 @@
 import google.generativeai as genai
-from google.cloud import dialogflow  # Correct
+from google.cloud import dialogflow
 from google.oauth2 import service_account
 import os
 from dotenv import load_dotenv
