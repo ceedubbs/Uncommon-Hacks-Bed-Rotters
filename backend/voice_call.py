@@ -24,32 +24,63 @@ from twilio.twiml.voice_response import VoiceResponse, Gather
 @voice_call_router.post("/voice")
 async def voice(request: Request):
     form_data = await request.form()
-    user_input = form_data.get('SpeechResult', '')  # Capture speech input
-
-    print(f"User input: {user_input}")  # Log for debugging
-
+    user_input = form_data.get('SpeechResult', '')
+    call_sid = form_data.get('CallSid', '')
+    
     response = VoiceResponse()
+    
+    # Debug logging
+    print(f"New call from {form_data.get('From', '')}")
+    print(f"Call SID: {call_sid}")
+    print(f"User input: {user_input}")
 
-    # Step 1: Bot greets the user
-    response.say("Hello, I am Emma, your personal cancer support bot. How can I assist you today?")
+    if not user_input:
+        # Initial greeting with gather
+        response.say("Hello, I'm Emma, your personal cancer support assistant.", voice="woman")
+        gather = Gather(
+            input='speech',
+            action=f"/voice?CallSid={call_sid}",
+            method="POST",
+            timeout=10,
+            speechTimeout="auto",
+            language="en-US"
+        )
+        gather.say("How are you feeling today? Please describe your symptoms or ask any questions.")
+        response.append(gather)
+        
+        # If no input after gathering
+        response.say("I didn't hear anything. Please speak clearly after the tone.")
+        response.pause(length=2)
+        return PlainTextResponse(content=str(response), media_type="application/xml")
 
-    # Step 2: Start gathering speech input, allow enough time for the user to respond
-    gather = Gather(input='speech', timeout=20, speech_model='phone_call', language='en-US')
-    gather.say("Please tell me how you're feeling today or ask any questions. I'm here to listen.")
-    response.append(gather)
-
-    # Step 3: If no input is captured, re-prompt the user (give a retry option)
-    response.say("I didn't quite catch that. Could you please try again? I'm here for you.")
-
-    # Step 4: If speech input is captured, process and respond in a caring manner
-    if user_input:
-        response_text = get_ai_response(user_input)  # Process the input and get a response from Gemini
-        response.say(f"Thank you for sharing that with me. I understand how you're feeling, and here's how I can assist you: {response_text}")
-    else:
-        response.say("It seems I couldn't hear you. Please feel free to try again. I'm ready to listen.")
-
-    # Step 5: End the call with a friendly closing message
-    response.say("Thank you for reaching out. Take care, and goodbye for now.")
+    try:
+        # Process user input with Gemini
+        response_text = get_ai_response(
+            f"""You are Emma, a compassionate cancer support assistant. 
+            Respond to this patient in a caring, professional tone in 1-2 short sentences.
+            Patient said: {user_input}"""
+        )
+        
+        # Format the response for phone audio
+        clean_response = response_text.replace('*', '').replace('#', '')
+        
+        # Continue conversation
+        response.say(f"I understand you said: {user_input}. {clean_response}", voice="woman")
+        
+        gather = Gather(
+            input='speech',
+            action=f"/voice?CallSid={call_sid}",
+            method="POST",
+            timeout=5,
+            speechTimeout="auto"
+        )
+        gather.say("Is there anything else I can help with? Please say yes or no.")
+        response.append(gather)
+        
+    except Exception as e:
+        print(f"Error processing request: {str(e)}")
+        response.say("I'm having trouble understanding. Let's try again.")
+        response.redirect("/voice")
 
     return PlainTextResponse(content=str(response), media_type="application/xml")
 
