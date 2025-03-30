@@ -3,10 +3,9 @@ from typing import Optional, Dict, Any
 import os
 from dotenv import load_dotenv
 from twilio.rest import Client
-from fastapi import FastAPI, Request
 from twilio.twiml.messaging_response import MessagingResponse
 from pydantic import BaseModel
-from fastapi import APIRouter, BackgroundTasks
+from fastapi import APIRouter, BackgroundTasks, Request
 
 
 load_dotenv()
@@ -39,14 +38,12 @@ async def receive_message(request: Request, background_tasks: BackgroundTasks):
     user_phone = form_data.get('From', '')  # Extract the phone number of the user
 
     response = generate_response(user_message)  # Generate a response based on the user’s message
+    user_phone = user_phone.replace("whatsapp:", "")
     
     background_tasks.add_task(send_message, MessageRequest(phone=user_phone, body=response['response']))
 
     
     return "Message sent successfully."
-
-
-
 
 
 def generate_response(message: str, user_context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
