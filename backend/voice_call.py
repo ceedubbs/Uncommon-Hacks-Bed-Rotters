@@ -42,7 +42,7 @@ async def make_call(call_data: CallRequest):
     call = client.calls.create(
         to=call_data.to_phone,
         from_=call_data.from_phone,
-        url="http://your-server.com/voice/"
+        url="http://18.216.1.232:8000/voice"
     )
 
     return {"message": "Call initiated", "call_sid": call.sid}
