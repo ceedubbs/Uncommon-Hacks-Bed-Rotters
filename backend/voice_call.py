@@ -19,68 +19,76 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 
-from twilio.twiml.voice_response import VoiceResponse, Gather
+from twilio.twiml.voice_response import VoiceResponse, Gather, Hangup
 
 @voice_call_router.post("/voice")
 async def voice(request: Request):
     form_data = await request.form()
-    user_input = form_data.get('SpeechResult', '')
+    user_input = form_data.get('SpeechResult', '').lower()
+    digits = form_data.get('Digits', '')  # For keypad input
     call_sid = form_data.get('CallSid', '')
     
     response = VoiceResponse()
     
     # Debug logging
-    print(f"New call from {form_data.get('From', '')}")
-    print(f"Call SID: {call_sid}")
-    print(f"User input: {user_input}")
+    print(f"Call from {form_data.get('From', '')}")
+    print(f"User said: {user_input}")
+    print(f"Digits pressed: {digits}")
 
-    if not user_input:
-        # Initial greeting with gather
-        response.say("Hello, I'm Emma, your personal cancer support assistant.", voice="woman")
+    # End call if user pressed # or said goodbye
+    if 'goodbye' in user_input or '#' in digits:
+        response.say("Thank you for calling. Remember I'm here whenever you need support. Goodbye.", voice="woman")
+        response.hangup()
+        return PlainTextResponse(content=str(response), media_type="application/xml")
+
+    if not user_input and not digits:
+        # Initial greeting
+        response.say("Hello, this is Emma. I'm here to listen and help with your cancer care questions.", voice="woman")
         gather = Gather(
-            input='speech',
+            input='speech dtmf',  # Accept both voice and keypad
             action=f"/voice?CallSid={call_sid}",
             method="POST",
             timeout=10,
             speechTimeout="auto",
+            numDigits=1,
             language="en-US"
         )
-        gather.say("How are you feeling today? Please describe your symptoms or ask any questions.")
+        gather.say("How are you feeling today? You can speak freely or press any key when ready.")
         response.append(gather)
-        
-        # If no input after gathering
-        response.say("I didn't hear anything. Please speak clearly after the tone.")
-        response.pause(length=2)
         return PlainTextResponse(content=str(response), media_type="application/xml")
 
+    # Process user input
     try:
-        # Process user input with Gemini
-        response_text = get_ai_response(
-            f"""You are Emma, a compassionate cancer support assistant. 
-            Respond to this patient in a caring, professional tone in 1-2 short sentences.
-            Patient said: {user_input}"""
-        )
-        
-        # Format the response for phone audio
-        clean_response = response_text.replace('*', '').replace('#', '')
-        
-        # Continue conversation
-        response.say(f"I understand you said: {user_input}. {clean_response}", voice="woman")
-        
-        gather = Gather(
-            input='speech',
-            action=f"/voice?CallSid={call_sid}",
-            method="POST",
-            timeout=5,
-            speechTimeout="auto"
-        )
-        gather.say("Is there anything else I can help with? Please say yes or no.")
-        response.append(gather)
-        
+        if user_input:
+            # Generate natural response
+            prompt = f"""As Emma, a compassionate cancer nurse, respond naturally to:
+            Patient: {user_input}
+            Respond conversationally in 1-2 sentences, then ask a follow-up question."""
+            
+            ai_response = get_ai_response(prompt)
+            clean_response = ai_response.replace('*', '').replace('#', '')
+            
+            # Continue conversation
+            gather = Gather(
+                input='speech dtmf',
+                action=f"/voice?CallSid={call_sid}",
+                method="POST",
+                timeout=10,
+                speechTimeout="auto",
+                numDigits=1
+            )
+            gather.say(clean_response, voice="woman")
+            response.append(gather)
+            
+        elif digits:
+            response.say("Please tell me how you're feeling or ask your question.", voice="woman")
+            response.redirect("/voice")
+            
     except Exception as e:
-        print(f"Error processing request: {str(e)}")
-        response.say("I'm having trouble understanding. Let's try again.")
-        response.redirect("/voice")
+        print(f"Error: {str(e)}")
+        response.say("Let me connect you to a human specialist. One moment please.")
+        # Here you'd add actual transfer logic
+        response.hangup()
 
     return PlainTextResponse(content=str(response), media_type="application/xml")
 
